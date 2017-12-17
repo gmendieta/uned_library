@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Uned Library", "Uned Library\Uned Library.vcxproj", "{C981A96D-9D41-4DFD-B0DA-7F541126039C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "uned_library", "uned_library\uned_library.vcxproj", "{C981A96D-9D41-4DFD-B0DA-7F541126039C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
