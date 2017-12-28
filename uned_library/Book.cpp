@@ -6,8 +6,8 @@
 
 using namespace std;
 
-Book::Book(const string& isbn, const string& title, const string& writter)
-	:isbn(isbn), title(title), writer(writter)
+Book::Book(const string& isbn, const string& title, const string& writer)
+	:isbn(isbn), title(title), writer(writer)
 {
 }
 
@@ -36,12 +36,12 @@ void Book::set_title(const string& title)
 	this->title = title;
 }
 
-string Book::get_writter() const
+string Book::get_writer() const
 {
 	return this->writer;
 }
 
-void Book::set_writter(const string& writter)
+void Book::set_writer(const string& writter)
 {
 	this->writer = writter;
 }

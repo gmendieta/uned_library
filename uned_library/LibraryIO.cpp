@@ -92,7 +92,7 @@ bool LibraryIO::write_book_csv(const string& filepath, const list<shared_ptr<Boo
 		return false;
 	}
 	for (auto&& book : book_l) {
-		fp << book->get_isbn() << CSV_SEP << book->get_title() << CSV_SEP << book->get_writter() << endl;
+		fp << book->get_isbn() << CSV_SEP << book->get_title() << CSV_SEP << book->get_writer() << endl;
 	}
 	fp.close();
 	return true;
