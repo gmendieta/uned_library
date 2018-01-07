@@ -8,11 +8,11 @@
 
 using namespace std;
 
+
 Library::Library()
 {
 
 }
-
 
 Library::~Library()
 {
@@ -26,7 +26,6 @@ bool Library::exists_user(const string& dni) const
 	return (u != nullptr);
 }
 
-// Task: Implement this function
 bool Library::add_user(const string& dni, const string& first_name, const string& last_name)
 {
 	if (exists_user(dni)) {
@@ -37,11 +36,8 @@ bool Library::add_user(const string& dni, const string& first_name, const string
 	return true;
 }
 
-
-// Task: Implement this function
 bool Library::add_user(shared_ptr<User>& user)
 {
-	// Potential Task 1: Control that the dni is not repeated
 	if (exists_user(user->get_dni())) {
 		return false;
 	}
@@ -70,7 +66,7 @@ shared_ptr<User> Library::find_user(const string& dni) const
 		if (user->get_dni() == dni)
 			return user;
 	}
-	return nullptr;
+	return shared_ptr<User>();
 }
 
 bool Library::exists_book(const string& isbn) const
@@ -79,7 +75,6 @@ bool Library::exists_book(const string& isbn) const
 	return (b != nullptr);
 }
 
-// Task: Implement this function
 bool Library::add_book(const string& isbn, const string& title, const string& writter)
 {
 	if (exists_book(isbn)) {
@@ -90,10 +85,8 @@ bool Library::add_book(const string& isbn, const string& title, const string& wr
 	return true;
 }
 
-// Task: Implement this function
 bool Library::add_book(shared_ptr<Book>& book)
 {
-	// Task: Control that the dni is not repeated
 	if (exists_book(book->get_isbn())) {
 		return false;
 	}
@@ -122,22 +115,16 @@ shared_ptr<Book> Library::find_book(const string& isbn) const
 		if (book->get_isbn() == isbn)
 			return book;
 	}
-	return nullptr;
+	return shared_ptr<Book>();
 }
 
 bool Library::load_users(const string& filepath, bool replace)
 {
 	list<shared_ptr<User>> user_l;
 	if (LibraryIO::read_user_csv(filepath, user_l))	{
-		if (replace) {
-			this->user_l = user_l;
-		}
-		else {
-			for (auto&& user : user_l) {
-				if (exists_user(user->get_dni()))
-					continue;
-				this->user_l.push_back(user);
-			}
+		if (replace) this->user_l.clear(); // If replace is True, remove all previous Users
+		for (auto&& user : user_l) {
+			add_user(user);
 		}
 		return true;
 	}
@@ -153,21 +140,15 @@ bool Library::load_books(const string& filepath, bool replace)
 {
 	list<shared_ptr<Book>> book_l;
 	if (LibraryIO::read_book_csv(filepath, book_l))	{
-		if (replace) {
-			this->book_l = book_l;
+		if (replace) this->book_l.clear(); // If replace is True, remove all previous Books
+		for (auto&& book : book_l) {
+			add_book(book);
 		}
-		else {
-			for (auto&& book : book_l) {
-				if (exists_user(book->get_isbn()))
-					continue;
-				this->book_l.push_back(book);
-			}
-		}
+		this->book_l = book_l;
 		return true;
 	}
 	return false;
 }
-
 
 bool Library::save_books(const string& filepath) const
 {
